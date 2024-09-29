@@ -5,6 +5,7 @@ import dotenv from 'dotenv';
 
 import createHashKey from './utils/hashing';
 import Quote from './models/Quote';
+import { AppPageRouteModule } from 'next/dist/server/future/route-modules/app-page/module.compiled';
 
 const app = express();
 const port = 4000;
@@ -19,7 +20,13 @@ app.listen(port, () => {
   console.log(`Express server running on http://localhost:${port}`);
 });
 
+app.get('/', (req, res) => {
+  res.send('it works!');
+});
+
 app.post('/savequote', async (req, res) => {
+  console.log('/savequote');
+
   const { author, text } = req.body;
 
   const quote = {
@@ -37,6 +44,8 @@ app.post('/savequote', async (req, res) => {
 });
 
 app.get('/fetchquote', async (req, res) => {
+  console.log('/fetchquote');
+
   try {
     const recordCount = await Quote.countDocuments(); 
     const randomNum = Math.floor(Math.random() * recordCount);
@@ -51,6 +60,8 @@ app.get('/fetchquote', async (req, res) => {
 });
 
 app.get('/fetchall', async (req, res) => {
+  console.log('/fetchall');
+
   try {
     const quotes = await Quote.find(); // Fetch all records
     res.json(quotes);
@@ -60,4 +71,3 @@ app.get('/fetchall', async (req, res) => {
     res.status(500).json({ message: 'Failed to fetch quotes' });
   }
 });
-
