@@ -4,6 +4,8 @@ import connectToDB from './mongoose';
 import dotenv from 'dotenv';
 
 import createHashKey from './utils/hashing';
+import Quote from './models/Quote';
+
 
 const app = express();
 const port = 4000;
@@ -18,12 +20,16 @@ app.get('/', async (req, res) => {
 
   const quote = {
     author: 'Dumbledore',
-    text: 'Do you not see?'
+    text: 'Do you not see?',
+    hash_id: ''
   };
   
   const hash = createHashKey(quote);
+  quote.hash_id = hash;
 
-  console.log(hash);
+  const newQuote = new Quote(quote);
+
+  await newQuote.save();
 });
 
 app.listen(port, () => {
