@@ -40,7 +40,12 @@ app.post('/savequote', async (req, res) => {
 
   if (!quoteExists) {
     new Quote(quote).save(); // save quote to MongoDB
+    res.send(200);
+  } else {
+    res.send(409);
   }
+
+  
 });
 
 app.get('/fetchquote', async (req, res) => {
