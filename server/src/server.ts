@@ -6,7 +6,6 @@ import dotenv from 'dotenv';
 import createHashKey from './utils/hashing';
 import Quote from './models/Quote';
 
-
 const app = express();
 const port = 4000;
 
@@ -14,6 +13,10 @@ dotenv.config(); // configures environment
 app.use(cors());
 
 connectToDB();
+
+app.listen(port, () => {
+  console.log(`Express server running on http://localhost:${port}`);
+});
 
 app.get('/', async (req, res) => {
   res.send('It worked!');
@@ -32,6 +35,23 @@ app.get('/', async (req, res) => {
   await newQuote.save();
 });
 
-app.listen(port, () => {
-  console.log(`Express server running on http://localhost:${port}`);
+app.post('/savequote', async (req, res) => {
+
 });
+
+app.get('/fetchquote', async (req, res) => {
+
+});
+
+app.get('/fetchall', async (req, res) => {
+  try {
+    const quotes = await Quote.find(); // Fetch all records
+    res.json(quotes);
+
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: 'Failed to fetch quotes' });
+
+  }
+});
+
