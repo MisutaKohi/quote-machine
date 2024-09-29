@@ -5,7 +5,6 @@ import dotenv from 'dotenv';
 
 import createHashKey from './utils/hashing';
 import Quote from './models/Quote';
-import { AppPageRouteModule } from 'next/dist/server/future/route-modules/app-page/module.compiled';
 
 const app = express();
 const port = 4000;
@@ -44,8 +43,6 @@ app.post('/savequote', async (req, res) => {
   } else {
     res.send(409);
   }
-
-  
 });
 
 app.get('/fetchquote', async (req, res) => {

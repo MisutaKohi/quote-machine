@@ -1,12 +1,6 @@
 'use client';
 
-import { useEffect, useState } from 'react';
-
-interface Quote {
-  author: string;
-  text: string;
-  hash_id: string
-}
+import { useState } from 'react';
 
 export default function Page() {
   const [ formData, setFormData ] = useState({
@@ -36,6 +30,11 @@ export default function Page() {
 
     if (response.ok) {
       console.log('okay');
+      setFormData({
+        text: '',
+        author: ''
+      });
+
     } else {
       console.log('quote already exists');
     }

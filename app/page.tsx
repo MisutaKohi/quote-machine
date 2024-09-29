@@ -20,9 +20,6 @@ export default function Home() {
   async function fetchQuote() {
     const res = await fetch('http://localhost:4000/fetchquote');
     const data = await res.json();
-
-    console.log(data);
-
     setQuote(data);
   }
 
