@@ -40,7 +40,17 @@ app.post('/savequote', async (req, res) => {
 });
 
 app.get('/fetchquote', async (req, res) => {
+  try {
+    const recordCount = await Quote.countDocuments(); 
+    const randomNum = Math.floor(Math.random() * recordCount);
+    const randomQuote = await Quote.findOne().skip(randomNum);
 
+    res.json(randomQuote);
+
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: 'Failed to fetch count' });
+  }
 });
 
 app.get('/fetchall', async (req, res) => {
@@ -51,7 +61,6 @@ app.get('/fetchall', async (req, res) => {
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: 'Failed to fetch quotes' });
-
   }
 });
 
