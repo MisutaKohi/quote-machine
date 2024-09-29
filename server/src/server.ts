@@ -11,32 +11,29 @@ const port = 4000;
 
 dotenv.config(); // configures environment
 app.use(cors());
+app.use(express.json());
 
-connectToDB();
+connectToDB(); // create connection to MongoDB
 
 app.listen(port, () => {
   console.log(`Express server running on http://localhost:${port}`);
 });
 
-app.get('/', async (req, res) => {
-  res.send('It worked!');
+app.post('/savequote', async (req, res) => {
+  const { author, text } = req.body;
 
   const quote = {
-    author: 'Dumbledore',
-    text: 'Do you not see?',
+    author: author,
+    text: text,
     hash_id: ''
-  };
-  
-  const hash = createHashKey(quote);
-  quote.hash_id = hash;
+  }
+  quote.hash_id = createHashKey(quote);
 
-  const newQuote = new Quote(quote);
+  const quoteExists = await Quote.findOne({ hash_id: quote.hash_id });
 
-  await newQuote.save();
-});
-
-app.post('/savequote', async (req, res) => {
-
+  if (!quoteExists) {
+    new Quote(quote).save(); // save quote to MongoDB
+  }
 });
 
 app.get('/fetchquote', async (req, res) => {
