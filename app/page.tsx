@@ -1,23 +1,42 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+
+interface Quote {
+  author: string;
+  text: string;
+  hash_id: string
+}
 
 export default function Home() {
-  const [ text, setText ] = useState('Nothing');
+  const blankQuote: Quote = {
+    author: '',
+    text: '',
+    hash_id: ''
+  };
 
-  async function testServer() : Promise<void> {
-    const res = await fetch('http://localhost:4000/');
-    const data = await res.text();
+  const [ quote, setQuote ] = useState<Quote>(blankQuote);
+
+  async function fetchQuote() {
+    const res = await fetch('http://localhost:4000/fetchquote');
+    const data = await res.json();
 
     console.log(data);
 
-    setText(data);
+    setQuote(data);
   }
+
+  useEffect(() => {
+    fetchQuote();
+  }, []);
 
   return (
     <div>
-      <p>{ text }</p>
-      <button onClick={ testServer }>Click here</button>
+      <ul>
+        <li>{ quote.text }</li>
+        <li>{ quote.author }</li>
+      </ul>
+      <button onClick={ fetchQuote }>New quote</button>
     </div>
   );
 }

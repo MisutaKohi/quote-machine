@@ -11,18 +11,19 @@ interface Quote {
 export default function Page() {
   const [ quotesArr, setQuotesArr] = useState<Quote[]>([]);
 
-  async function getQuotes() {
-    const quotes = await fetch('http://localhost:4000/fetchall');
-    const data: Quote[] = await quotes.json();
-
-    setQuotesArr(data);
-
-    console.log(data);
+  async function fetchQuotes() {
+    const res = await fetch('http://localhost:4000/fetchall');
+    const arr: Quote[] = await res.json();
+    setQuotesArr(arr);
   }
+
+  useEffect(() => {
+    fetchQuotes();
+  }, []);
+
 
   return (
     <div>
-      <button onClick={ getQuotes }>Click Me</button>
       <ol>
         {
           quotesArr.map((quote) => (
