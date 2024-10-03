@@ -2,3 +2,16 @@
 @tailwind components;
 @tailwind utilities;
 
+:root {
+  --row1: rgb(236, 241, 224);
+  --row2: rgb(255, 255, 255);
+
+  --bg1: rgb(67, 47, 50); 
+  --bg2: rgb(132, 175, 169); 
+  --bg3: rgb(48, 61, 78); 
+  --bg4: rgb(127, 167, 96); 
+  --bg5: rgb(49, 35, 36); 
+  --bg6: rgb(231, 160, 60); 
+  --bg7: rgb(85, 172, 104); 
+  --bg8: rgb(189, 187, 156); 
+}

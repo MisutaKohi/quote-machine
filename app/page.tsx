@@ -14,12 +14,19 @@ export default function Home() {
     text: '',
     hash_id: ''
   };
-
   const [ quote, setQuote ] = useState<Quote>(blankQuote);
+
+  const bgColors = ['#432F32', '#84AFA9', '#303D4E', '#7FA760', '#312324', '#E7A03C', '#55AC68', '#BDBB9C'];
+  let randomIdx = Math.floor(Math.random() * bgColors.length);
+  const [ bgColor, setBgColor ] = useState<string>(bgColors[randomIdx]);
 
   async function fetchQuote() {
     const res = await fetch('http://localhost:4000/fetchquote');
     const data = await res.json();
+    
+    randomIdx = Math.floor(Math.random() * bgColors.length)
+    setBgColor(bgColors[randomIdx]);
+
     setQuote(data);
   }
 
@@ -28,12 +35,23 @@ export default function Home() {
   }, []);
 
   return (
-    <div>
-      <ul>
-        <li>{ quote.text }</li>
-        <li>{ quote.author }</li>
-      </ul>
-      <button onClick={ fetchQuote }>New quote</button>
-    </div>
+    <main 
+      style={{ backgroundColor: `${bgColor}`}}
+      className='min-h-screen min-w-screen'
+    >
+      <div className="rounded bg-slate-100 max-w-md">
+        <ul>
+          <li>{ quote.text }</li>
+          <li>{ quote.author }</li>
+        </ul>
+        <button 
+          type='submit' 
+          onClick={ fetchQuote }
+          className="hover:bg-blue-700 text-white py-2 px-4 rounded"
+          style={{ backgroundColor: `${bgColor}`}}>
+            New quote
+          </button>
+        </div>
+    </main>
   );
 }
