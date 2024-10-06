@@ -9,7 +9,7 @@ interface Quote {
 }
 
 export default function Page() {
-  const [ quotesArr, setQuotesArr] = useState<Quote[]>([]);
+  const [ quotesArr, setQuotesArr ] = useState<Quote[]>([]);
 
   async function fetchQuotes() {
     const res = await fetch('http://localhost:4000/fetchall');
@@ -23,16 +23,18 @@ export default function Page() {
 
 
   return (
-    <div>
-      <ol>
-        {
-          quotesArr.map((quote) => (
-            <li key={quote.hash_id}>
-              <strong>{quote.author}:</strong> {quote.text}
-            </li>
-          ))
-        }
-      </ol>
+    <div className="min-h-screen min-w-screen flex justify-center items-center pt-[90px] pb-[90px] bg-slate-100">
+      <div className='rounded bg-slate-100 w-[750px] h-[550px] overflow-y-auto' style={{border: '2px gold solid'}}>
+        <ol style={{border: '2px black solid'}}>
+          {
+            quotesArr.map((quote) => (
+              <li key={quote.hash_id}>
+                <strong>{quote.author}:</strong> {quote.text}
+              </li>
+            ))
+          }
+        </ol>
+      </div>
     </div>
   );
 }

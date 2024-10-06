@@ -41,7 +41,7 @@ export default function Page() {
   };
   
   return (
-    <form onSubmit={ handleSubmit}>
+    <form onSubmit={ handleSubmit} className='pt-[90px]'>
       <div>
         <label htmlFor="text">Quote:</label>
         <input

@@ -37,21 +37,26 @@ export default function Home() {
   return (
     <main 
       style={{ backgroundColor: `${bgColor}`}}
-      className='min-h-screen min-w-screen'
+      className='min-h-screen min-w-screen flex justify-center items-center pt-[90px] pb-[90px]'
     >
-      <div className="rounded bg-slate-100 max-w-md">
-        <ul>
-          <li>{ quote.text }</li>
-          <li>{ quote.author }</li>
-        </ul>
-        <button 
-          type='submit' 
-          onClick={ fetchQuote }
-          className="hover:bg-blue-700 text-white py-2 px-4 rounded"
-          style={{ backgroundColor: `${bgColor}`}}>
-            New quote
-          </button>
+      <div className="rounded bg-slate-100 w-[550px] min-h-[350px]">
+        <div>
+          <p>{ quote.text }</p>
         </div>
+
+        <div>
+          <p>- { quote.author }</p>
+        </div>
+          
+        <div>
+          <button 
+            onClick={ fetchQuote }
+            className="hover:bg-blue-700 text-white py-2 px-4 rounded"
+            style={{ backgroundColor: `${bgColor}`}}>
+              New quote
+            </button>
+        </div>
+      </div>
     </main>
   );
 }
