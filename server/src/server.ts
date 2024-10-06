@@ -45,6 +45,25 @@ app.post('/savequote', async (req, res) => {
   }
 });
 
+app.post('/updatequote', async (req, res) => {
+  console.log('/updatequote');
+
+  const { author, text, hash_id } = req.body;
+
+  console.log(req.body);
+
+  const filter = { hash_id: hash_id };
+  const replacement = { author: author, text: text, hash_id: hash_id };
+
+  const success = await Quote.replaceOne(filter, replacement);
+
+  if (success) {
+    res.send(200);
+  } else {
+    res.send(409);
+  }
+});
+
 app.get('/fetchquote', async (req, res) => {
   console.log('/fetchquote');
 
