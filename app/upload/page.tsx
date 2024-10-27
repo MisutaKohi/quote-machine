@@ -41,32 +41,48 @@ export default function Page() {
   };
   
   return (
-    <form onSubmit={ handleSubmit} className='pt-[90px]'>
-      <div>
-        <label htmlFor="text">Quote:</label>
-        <input
-          type="text"
-          id="text"
-          name="text"
-          value={formData.text}
-          onChange={ handleChange }
-          required
-        />
-      </div>
+    <div className="min-h-screen min-w-screen flex justify-center items-center pt-[90px] pb-[90px] bg-stone-100">
+      <form onSubmit={ handleSubmit} className='flex flex-col justify-center items-center rounded bg-slate-200 w-[550px] min-h-[350px] border-2 border-gray-300'>
+        <div className="pb-[15px] w-[500px] flex flex-row">
+          <div className="w-[20%] flex justify-end pr-2">
+            <label htmlFor="text" className="text-2xl ">Quote: </label>
+          </div>
+          <div className="w-[75%]">
+            <input
+              type="text"
+              id="text"
+              name="text"
+              className="w-[100%] h-[100%] p-2"
+              value={formData.text}
+              onChange={ handleChange }
+              required
+            />
+          </div>
+        </div>
 
-      <div>
-        <label htmlFor="author">Author:</label>
-        <input
-          type="text"
-          id="author"
-          name="author"
-          value={ formData.author }
-          onChange={ handleChange }
-          required
-        />
-      </div>
+        <div className="pb-[40px] w-[500px] flex flex-row">
+          <div className="w-[20%] flex justify-end pr-2">
+            <label htmlFor="author" className="text-2xl">Author: </label>
+          </div>
+          <div className="w-[75%]">
+            <input
+              type="text"
+              id="author"
+              name="author"
+              className="w-[100%] h-[100%] p-2"
+              value={ formData.author }
+              onChange={ handleChange }
+              required
+            />
+          </div>
+        </div>
 
-      <button type="submit">Submit</button>
-    </form>
+        <button 
+          type="submit"
+          className="hover:bg-gray-700 bg-black text-white text-xl py-2 px-4 rounded border">
+            Submit
+          </button>
+      </form>
+    </div>
   )
 }
