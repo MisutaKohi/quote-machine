@@ -74,7 +74,7 @@ export default function Page() {
         <ol>
           {
             quotesArr.map((quote, index) => (
-              <li key={quote.hash_id} className={`flex justify-between items-center p-2 ${(index % 2 == 0) ? 'bg-gray-200' : ''}`}>
+              <li key={quote.hash_id} className={`flex justify-between items-center p-2 text-xl ${(index % 2 == 0) ? 'bg-gray-200' : ''}`}>
                 <span>
                   <strong>{quote.author}: </strong> 
                   {(quote.hash_id !== editID) 
