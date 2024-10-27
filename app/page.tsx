@@ -16,16 +16,26 @@ export default function Home() {
   };
   const [ quote, setQuote ] = useState<Quote>(blankQuote);
 
-  const bgColors = ['#432F32', '#84AFA9', '#303D4E', '#7FA760', '#312324', '#E7A03C', '#55AC68', '#BDBB9C'];
+  const bgColors = [
+    { name: 'dark brownish-purple', hexcode: '#432F32' }, 
+    { name: 'muted, cool teal', hexcode: '#84AFA9' },
+    { name: 'dark, desaturated blue-gray', hexcode: '#303D4E' },
+    { name: 'muted olive green', hexcode: '#7FA760' },
+    { name: 'dark reddish-brown', hexcode: '#312324' },
+    { name: 'warm, golden-orange', hexcode: '#E7A03C' },
+    { name: 'muted medium green', hexcode: '#55AC68' },
+    { name: 'muted beige-green', hexcode: '#BDBB9C' },  
+  ];
+  
   let randomIdx = Math.floor(Math.random() * bgColors.length);
-  const [ bgColor, setBgColor ] = useState<string>(bgColors[randomIdx]);
+  const [ bgColor, setBgColor ] = useState<string>(bgColors[0].hexcode);
 
   async function fetchQuote() {
     const res = await fetch('http://localhost:4000/fetchquote');
     const data = await res.json();
     
     randomIdx = Math.floor(Math.random() * bgColors.length)
-    setBgColor(bgColors[randomIdx]);
+    setBgColor(bgColors[randomIdx].hexcode);
 
     setQuote(data);
   }

@@ -35,11 +35,12 @@ app.post('/savequote', async (req, res) => {
   }
   quote.hash_id = createHashKey(quote);
 
-  const quoteExists = await Quote.findOne({ hash_id: quote.hash_id });
+  const quoteExists = await Quote.findOne({ hash_id: quote.hash_id }); // search MongoDB
 
   if (!quoteExists) {
     new Quote(quote).save(); // save quote to MongoDB
     res.send(200);
+    
   } else {
     res.send(409);
   }
