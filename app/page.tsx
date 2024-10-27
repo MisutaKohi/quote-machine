@@ -49,19 +49,27 @@ export default function Home() {
       style={{ backgroundColor: `${bgColor}`}}
       className='min-h-screen min-w-screen flex justify-center items-center pt-[90px] pb-[90px]'
     >
-      <div className="rounded bg-slate-100 w-[550px] min-h-[350px]">
-        <div>
-          <p>{ quote.text }</p>
+      <div className="flex flex-col rounded bg-slate-100 w-[550px] min-h-[350px]">
+        <div className="w-full h-[225px] flex justify-center items-center">
+          <p 
+            className="w-[90%] text-center text-4xl"
+            style={{ color: `${bgColor}`}}>
+              { quote.text }
+          </p>
         </div>
 
-        <div>
-          <p>- { quote.author }</p>
+        <div className="flex justify-end pr-[15px]">
+          <p 
+            className="text-2xl" 
+            style={{ color: `${bgColor}`}}>
+              - { quote.author }
+          </p>
         </div>
           
-        <div>
+        <div className="flex justify-center pt-[10px]">
           <button 
             onClick={ fetchQuote }
-            className="hover:bg-blue-700 text-white py-2 px-4 rounded"
+            className="hover:bg-blue-700 text-white text-xl py-2 px-4 rounded"
             style={{ backgroundColor: `${bgColor}`}}>
               New quote
             </button>
